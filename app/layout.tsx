@@ -1,16 +1,9 @@
-export const metadata = {
-  title: 'MyBroApp',
-  description: 'Tu compañero emocional impulsado por IA',
-};
+import './globals.css'
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body>{children}</body>
     </html>
-  );
+  )
 }
