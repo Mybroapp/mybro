@@ -1,9 +1,11 @@
-import ChatWindow from '../components/ChatWindow';
+import ChatBox from './components/ChatBox';
 
 export default function Home() {
   return (
     <main>
-      <ChatWindow />
+      <h1>MyBro está vivo 🧠💬</h1>
+      <p>¡Hi Bro! Bienvenido a tu chatbot emocional.</p>
+      <ChatBox />
     </main>
   );
 }
