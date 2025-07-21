@@ -1,48 +1,20 @@
-'use client';
+import React from "react";
+import ChatBox from "./ChatBox";
 
-import { useState } from 'react';
-
-export default function ChatWindow() {
-  const [messages, setMessages] = useState<string[]>([]);
-  const [input, setInput] = useState('');
-
-  const handleSend = async () => {
-    if (!input.trim()) return;
-
-    const userMessage = input;
-    setMessages((prev) => [...prev, `🧍: ${userMessage}`]);
-    setInput('');
-
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage }),
-      });
-
-      const data = await res.json();
-      setMessages((prev) => [...prev, `🤖: ${data.reply}`]);
-    } catch (error) {
-      setMessages((prev) => [...prev, '❌ Error en la respuesta']);
-    }
-  };
-
+const ChatWindow = () => {
   return (
-    <div style={{ padding: 20, maxWidth: 600, margin: '0 auto' }}>
-      <h2>MyBroApp</h2>
-      <div style={{ border: '1px solid #ccc', padding: 10, height: 300, overflowY: 'auto' }}>
-        {messages.map((msg, i) => (
-          <div key={i} style={{ marginBottom: 8 }}>{msg}</div>
-        ))}
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 p-4">
+      <div className="w-full max-w-2xl bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-200">
+        <header className="bg-indigo-500 text-white p-4 text-center rounded-t-2xl shadow">
+          <h1 className="text-2xl font-bold">MyBroApp 💬</h1>
+          <p className="text-sm">Tu compañero emocional, siempre aquí.</p>
+        </header>
+        <main className="p-4">
+          <ChatBox />
+        </main>
       </div>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Escribe aquí..."
-        style={{ width: '80%', padding: 8, marginTop: 10 }}
-      />
-      <button onClick={handleSend} style={{ padding: 8, marginLeft: 10 }}>Enviar</button>
     </div>
   );
-}
+};
+
+export default ChatWindow;
