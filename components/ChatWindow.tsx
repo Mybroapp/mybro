@@ -1,17 +1,16 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function ChatWindow() {
-  const [messages, setMessages] = useState<{ sender: 'user' | 'bot'; text: string }[]>([]);
+  const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState('');
-  const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const handleSend = async () => {
     if (!input.trim()) return;
 
     const userMessage = input;
-    setMessages((prev) => [...prev, { sender: 'user', text: userMessage }]);
+    setMessages((prev) => [...prev, `🧍: ${userMessage}`]);
     setInput('');
 
     try {
@@ -22,45 +21,38 @@ export default function ChatWindow() {
       });
 
       const data = await res.json();
-      setMessages((prev) => [...prev, { sender: 'bot', text: data.reply }]);
+      setMessages((prev) => [...prev, `🤖: ${data.reply}`]);
     } catch (error) {
-      setMessages((prev) => [...prev, { sender: 'bot', text: '❌ Error en la respuesta' }]);
+      setMessages((prev) => [...prev, '❌ Error en la respuesta']);
     }
   };
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md border border-gray-200">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">MyBroApp 💬</h2>
-      <div className="h-80 overflow-y-auto space-y-2 p-2 bg-gray-50 rounded-lg border border-gray-200">
-        {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={`max-w-[80%] px-4 py-2 rounded-xl text-sm ${
-              msg.sender === 'user'
-                ? 'bg-blue-100 text-blue-800 self-end ml-auto'
-                : 'bg-purple-100 text-purple-800 self-start mr-auto'
-            }`}
-          >
-            {msg.text}
-          </div>
-        ))}
-        <div ref={bottomRef} />
+    <div className="p-4 max-w-2xl mx-auto">
+      {/* Verificación de Tailwind */}
+      <div className="bg-red-500 text-white p-4 rounded mb-4 text-center">
+        Tailwind está funcionando
       </div>
-      <div className="flex mt-4">
+
+      <h2 className="text-2xl font-bold mb-2">MyBroApp</h2>
+
+      <div className="border border-gray-300 rounded p-3 h-72 overflow-y-auto bg-white shadow">
+        {messages.map((msg, i) => (
+          <div key={i} className="mb-2">{msg}</div>
+        ))}
+      </div>
+
+      <div className="mt-4 flex">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Escribe aquí..."
-          className="flex-1 px-4 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
+          className="flex-grow p-2 border rounded"
         />
         <button
           onClick={handleSend}
-          className="bg-purple-500 text-white px-4 py-2 rounded-r-lg hover:bg-purple-600 transition"
+          className="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
         >
           Enviar
         </button>
