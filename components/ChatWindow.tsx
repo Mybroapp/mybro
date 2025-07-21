@@ -1,5 +1,5 @@
 import React from "react";
-import ChatBox from "./ChatBox.tsx";
+import ChatBox from "./ChatBox.";
 
 const ChatWindow = () => {
   return (
