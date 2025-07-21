@@ -28,35 +28,68 @@ export default function ChatWindow() {
   };
 
   return (
-    <div className="p-4 max-w-2xl mx-auto">
-      {/* Verificación de Tailwind */}
-      <div className="bg-red-500 text-white p-4 rounded mb-4 text-center">
-        Tailwind está funcionando
-      </div>
-
-      <h2 className="text-2xl font-bold mb-2">MyBroApp</h2>
-
-      <div className="border border-gray-300 rounded p-3 h-72 overflow-y-auto bg-white shadow">
+    <div style={{ padding: 20, maxWidth: 600, margin: '0 auto' }}>
+      <h2>MyBroApp</h2>
+      <div style={{ border: '1px solid #ccc', padding: 10, height: 300, overflowY: 'auto' }}>
         {messages.map((msg, i) => (
-          <div key={i} className="mb-2">{msg}</div>
+          <div key={i} style={{ marginBottom: 8 }}>{msg}</div>
         ))}
       </div>
-
-      <div className="mt-4 flex">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Escribe aquí..."
-          className="flex-grow p-2 border rounded"
-        />
-        <button
-          onClick={handleSend}
-          className="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Enviar
-        </button>
-      </div>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Escribe aquí..."
+        style={{ width: '80%', padding: 8, marginTop: 10 }}
+      />
+      <button onClick={handleSend} style={{ padding: 8, marginLeft: 10 }}>Enviar</button>
     </div>
+  );
+}
+
+tailwind.config.ts
+
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",       // Archivos dentro de /app
+    "./components/**/*.{js,ts,jsx,tsx}" // Archivos dentro de /components
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ["Inter", "sans-serif"], // Tipografía moderna
+      },
+      borderRadius: {
+        xl: "1rem",
+        "2xl": "1.5rem",
+      },
+      boxShadow: {
+        soft: "0 4px 12px rgba(0, 0, 0, 0.1)", // Sombra suave
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;
+
+layout.tsx
+
+export const metadata = {
+  title: 'MyBroApp',
+  description: 'Tu compañero emocional impulsado por IA',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="es">
+      <body>{children}</body>
+    </html>
   );
 }
