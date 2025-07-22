@@ -81,7 +81,6 @@ export default function ChatWindow() {
         style={{
           flex: 1,
           marginTop: 50,
-          marginBottom: 65,
           overflowY: 'auto',
           padding: '12px',
           backgroundColor: '#fff',
@@ -93,13 +92,9 @@ export default function ChatWindow() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* 🎯 INPUT FIJO ABAJO */}
+      {/* 🎯 INPUT NORMAL */}
       <div
         style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          width: '100%',
           padding: '10px',
           borderTop: '1px solid #eee',
           backgroundColor: '#f9f9f9',
