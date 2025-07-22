@@ -73,10 +73,27 @@ export default function ChatWindow() {
             backgroundColor: '#eee',
             border: '1px solid #ccc',
             color: '#333',
+            marginRight: 10,
           }}
         >
           Borrar chat
         </button>
+        <a
+          href="https://ko-fi.com/mybroapp"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            padding: 8,
+            backgroundColor: '#f9c846',
+            color: '#000',
+            textDecoration: 'none',
+            borderRadius: 4,
+            fontWeight: 'bold',
+            border: '1px solid #d4a73c',
+          }}
+        >
+          ☕ Invítame un café
+        </a>
       </div>
     </div>
   );
