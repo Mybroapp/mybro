@@ -27,7 +27,7 @@ export default function ChatWindow() {
     if (!input.trim()) return;
 
     const userMessage = input;
-    setMessages((prev) => [...prev, `🧽: ${userMessage}`]);
+    setMessages((prev) => [...prev, `🧍: ${userMessage}`]);
     setInput('');
 
     try {
@@ -60,6 +60,7 @@ export default function ChatWindow() {
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 1000,
+          fontFamily: 'Inter, system-ui, sans-serif',
         }}
       >
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
@@ -74,6 +75,7 @@ export default function ChatWindow() {
             padding: '10px',
             overflowY: 'auto',
             backgroundColor: '#fff',
+            fontFamily: 'Inter, system-ui, sans-serif', // ✅ Aquí se aplica la fuente
           }}
         >
           {messages.map((msg, i) => (
@@ -91,6 +93,7 @@ export default function ChatWindow() {
             display: 'flex',
             gap: 8,
             flexWrap: 'wrap',
+            fontFamily: 'Inter, system-ui, sans-serif',
           }}
         >
           <input
@@ -112,11 +115,17 @@ export default function ChatWindow() {
               fontSize: 16,
             }}
           />
-          {/* Botón Enviar con ícono de flecha */}
           <button
             onClick={handleSend}
-            style={{ padding: '10px 16px', fontSize: 18 }}
-            aria-label="Enviar"
+            style={{
+              padding: '10px 16px',
+              fontSize: 16,
+              borderRadius: 6,
+              backgroundColor: '#007aff',
+              color: '#fff',
+              border: 'none',
+              cursor: 'pointer',
+            }}
           >
             ➤
           </button>
@@ -129,6 +138,8 @@ export default function ChatWindow() {
               padding: '10px 16px',
               backgroundColor: '#eee',
               border: '1px solid #ccc',
+              borderRadius: 6,
+              fontSize: 16,
             }}
           >
             Borrar
@@ -145,6 +156,8 @@ export default function ChatWindow() {
               borderRadius: 6,
               fontWeight: 'bold',
               border: '1px solid #d4a73c',
+              fontSize: 16,
+              display: 'inline-block',
             }}
           >
             ☕ Donar
