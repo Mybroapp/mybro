@@ -52,6 +52,12 @@ export default function ChatWindow() {
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSend();
+          }
+        }}
         placeholder="Escribe aquí..."
         style={{ width: '80%', padding: 8, marginTop: 10 }}
       />
