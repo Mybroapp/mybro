@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function ChatWindow() {
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState('');
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // 🔁 Al iniciar, cargar mensajes desde localStorage
   useEffect(() => {
@@ -14,10 +15,16 @@ export default function ChatWindow() {
     }
   }, []);
 
-  // 💾 Cada vez que cambian los mensajes, guardarlos en localStorage
+  // 💾 Guardar mensajes cuando cambian
   useEffect(() => {
     localStorage.setItem('mybro_messages', JSON.stringify(messages));
+    scrollToBottom(); // 👇 al nuevo mensaje
   }, [messages]);
+
+  // 🔽 Scroll automático al final
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -41,58 +48,73 @@ export default function ChatWindow() {
   };
 
   return (
-    <div style={{ padding: 20, maxWidth: 600, margin: '0 auto' }}>
-      <h2>MyBroApp</h2>
-      <div style={{ border: '1px solid #ccc', padding: 10, height: 300, overflowY: 'auto' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', padding: 10 }}>
+      <h2 style={{ textAlign: 'center' }}>MyBroApp</h2>
+
+      <div
+        style={{
+          flex: 1,
+          border: '1px solid #ccc',
+          padding: 10,
+          overflowY: 'auto',
+          backgroundColor: '#fff',
+        }}
+      >
         {messages.map((msg, i) => (
           <div key={i} style={{ marginBottom: 8 }}>{msg}</div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            handleSend();
-          }
-        }}
-        placeholder="Escribe aquí..."
-        style={{ width: '80%', padding: 8, marginTop: 10 }}
-      />
-      <div style={{ marginTop: 10 }}>
-        <button onClick={handleSend} style={{ padding: 8, marginRight: 10 }}>Enviar</button>
+
+      <div style={{ display: 'flex', marginTop: 10, gap: 8, flexWrap: 'wrap' }}>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              handleSend();
+            }
+          }}
+          placeholder="Escribe aquí..."
+          style={{
+            flex: 1,
+            padding: 10,
+            borderRadius: 4,
+            border: '1px solid #ccc',
+          }}
+        />
+        <button onClick={handleSend} style={{ padding: '10px 16px' }}>Enviar</button>
         <button
           onClick={() => {
             localStorage.removeItem('mybro_messages');
             setMessages([]);
           }}
           style={{
-            padding: 8,
+            padding: '10px 16px',
             backgroundColor: '#eee',
             border: '1px solid #ccc',
-            color: '#333',
-            marginRight: 10,
           }}
         >
-          Borrar chat
+          Borrar
         </button>
         <a
           href="https://ko-fi.com/mybroapp"
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            padding: 8,
+            padding: '10px 16px',
             backgroundColor: '#f9c846',
             color: '#000',
             textDecoration: 'none',
             borderRadius: 4,
             fontWeight: 'bold',
             border: '1px solid #d4a73c',
+            textAlign: 'center',
           }}
         >
-          ☕ Invítame un café
+          ☕ Donar
         </a>
       </div>
     </div>
