@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 🧷 Reset y estilo global */
+/* 🧷 Global reset y estilo base */
 * {
   box-sizing: border-box;
 }
@@ -12,17 +12,16 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* ❌ Desactiva scroll global */
+  overflow: hidden; /* ❌ Elimina scroll global */
   background-color: #f9f9f9;
-  font-family: 'Inter', system-ui, sans-serif; /* ✅ Fuente global */
-  -webkit-text-size-adjust: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-text-size-adjust: 100%; /* ✅ Prevenir zoom automático en móviles */
 }
 
-/* ✅ Prevenir zoom en inputs en móviles (Safari iOS) */
+/* ✅ Evitar zoom en inputs en móviles (Safari) */
 input,
 textarea,
 button,
 select {
   font-size: 16px;
-  font-family: inherit; /* ✅ Hereda fuente global */
 }
