@@ -7,7 +7,6 @@ export default function ChatWindow() {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // 🔁 Al iniciar, cargar mensajes desde localStorage
   useEffect(() => {
     const storedMessages = localStorage.getItem('mybro_messages');
     if (storedMessages) {
@@ -15,7 +14,6 @@ export default function ChatWindow() {
     }
   }, []);
 
-  // 💾 Guardar mensajes cuando cambian
   useEffect(() => {
     localStorage.setItem('mybro_messages', JSON.stringify(messages));
     scrollToBottom();
@@ -47,18 +45,33 @@ export default function ChatWindow() {
   };
 
   return (
-    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100dvh', overflow: 'hidden' }}>
       {/* Header fijo */}
-      <div style={{ padding: 10, backgroundColor: '#f9f9f9', textAlign: 'center', borderBottom: '1px solid #ccc' }}>
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: 50,
+          backgroundColor: '#f9f9f9',
+          borderBottom: '1px solid #ccc',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+        }}
+      >
         <h2 style={{ margin: 0 }}>MyBroApp</h2>
       </div>
 
-      {/* Chat principal */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: 10 }}>
+      {/* Contenido debajo del header */}
+      <div style={{ paddingTop: 60, height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div
           style={{
             flex: 1,
             border: '1px solid #ccc',
+            margin: '0 10px',
             padding: 10,
             overflowY: 'auto',
             backgroundColor: '#fff',
@@ -70,7 +83,8 @@ export default function ChatWindow() {
           <div ref={messagesEndRef} />
         </div>
 
-        <div style={{ display: 'flex', marginTop: 10, gap: 8, flexWrap: 'wrap' }}>
+        {/* Input y botones */}
+        <div style={{ display: 'flex', margin: 10, gap: 8, flexWrap: 'wrap' }}>
           <input
             type="text"
             value={input}
@@ -87,7 +101,7 @@ export default function ChatWindow() {
               padding: 10,
               borderRadius: 4,
               border: '1px solid #ccc',
-              fontSize: 16, // ✅ evita zoom en móviles
+              fontSize: 16,
             }}
           />
           <button onClick={handleSend} style={{ padding: '10px 16px' }}>Enviar</button>
@@ -119,7 +133,7 @@ export default function ChatWindow() {
               textAlign: 'center',
             }}
           >
-            ☕ Donar
+             Donar
           </a>
         </div>
       </div>
