@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function ChatWindow() {
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState('');
-  const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // ⏪ Cargar mensajes guardados
   useEffect(() => {
     const storedMessages = localStorage.getItem('mybro_messages');
     if (storedMessages) {
@@ -14,14 +14,10 @@ export default function ChatWindow() {
     }
   }, []);
 
+  // 💾 Guardar mensajes en localStorage
   useEffect(() => {
     localStorage.setItem('mybro_messages', JSON.stringify(messages));
-    scrollToBottom();
   }, [messages]);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -44,101 +40,62 @@ export default function ChatWindow() {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleSend();
+  };
+
+  const handleClear = () => {
+    localStorage.removeItem('mybro_messages');
+    setMessages([]);
+  };
+
   return (
-    <div style={{ height: '100dvh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-      {/* Header fijo tipo app */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: 50,
-          backgroundColor: '#ffffff',
-          borderBottom: '1px solid #ddd',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 1000,
-        }}
-      >
-        <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
+    <div className="h-screen w-screen flex flex-col bg-gray-50 text-gray-900 font-sans">
+      {/* 🔝 Header fijo */}
+      <header className="bg-white shadow-md text-center text-xl font-semibold py-3 sticky top-0 z-10">
+        MyBroApp
+      </header>
+
+      {/* 💬 Área de mensajes con scroll */}
+      <div className="flex-1 overflow-y-auto px-4 py-2">
+        {messages.map((msg, i) => (
+          <div key={i} className="mb-2 whitespace-pre-wrap">
+            {msg}
+          </div>
+        ))}
       </div>
 
-      {/* Contenido debajo del header */}
-      <div style={{ paddingTop: 50, flex: 1, display: 'flex', flexDirection: 'column' }}>
-        {/* Área de mensajes con scroll */}
-        <div
-          style={{
-            flex: 1,
-            padding: '10px',
-            overflowY: 'auto',
-            backgroundColor: '#fff',
-          }}
-        >
-          {messages.map((msg, i) => (
-            <div key={i} style={{ marginBottom: 10 }}>{msg}</div>
-          ))}
-          <div ref={messagesEndRef} />
-        </div>
-
-        {/* Input + botones */}
-        <div
-          style={{
-            padding: '10px',
-            borderTop: '1px solid #eee',
-            backgroundColor: '#f9f9f9',
-            display: 'flex',
-            gap: 8,
-            flexWrap: 'wrap',
-          }}
-        >
+      {/* ✍🏻 Input + Botones */}
+      <div className="p-2 border-t bg-white">
+        <div className="flex gap-2 mb-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                handleSend();
-              }
-            }}
+            onKeyDown={handleKeyDown}
             placeholder="Escribe aquí..."
-            style={{
-              flex: 1,
-              padding: 10,
-              borderRadius: 6,
-              border: '1px solid #ccc',
-              fontSize: 16,
-            }}
+            className="flex-1 px-4 py-2 border rounded text-base"
           />
-          <button onClick={handleSend} style={{ padding: '10px 16px' }}>Enviar</button>
           <button
-            onClick={() => {
-              localStorage.removeItem('mybro_messages');
-              setMessages([]);
-            }}
-            style={{
-              padding: '10px 16px',
-              backgroundColor: '#eee',
-              border: '1px solid #ccc',
-            }}
+            onClick={handleSend}
+            className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
+          >
+            ➤
+          </button>
+        </div>
+
+        <div className="flex gap-2">
+          <button
+            onClick={handleClear}
+            className="w-1/2 py-2 bg-gray-300 rounded hover:bg-gray-400 text-center"
           >
             Borrar
           </button>
           <a
-            href="https://ko-fi.com/mybroapp"
+            href="https://ko-fi.com/your_kofi_username"
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              padding: '10px 16px',
-              backgroundColor: '#f9c846',
-              color: '#000',
-              textDecoration: 'none',
-              borderRadius: 6,
-              fontWeight: 'bold',
-              border: '1px solid #d4a73c',
-            }}
+            className="w-1/2 py-2 bg-yellow-400 rounded hover:bg-yellow-500 text-center font-semibold"
           >
             ☕ Donar
           </a>
