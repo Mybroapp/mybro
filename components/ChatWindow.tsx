@@ -98,8 +98,8 @@ export default function ChatWindow() {
           borderTop: '1px solid #eee',
           backgroundColor: '#f9f9f9',
           display: 'flex',
-          gap: 8,
           flexWrap: 'wrap',
+          gap: 8,
           flexShrink: 0,
         }}
       >
@@ -125,6 +125,35 @@ export default function ChatWindow() {
           }}
         />
         <button onClick={handleSend} style={{ padding: '10px 16px' }}>Enviar</button>
+        <button
+          onClick={() => {
+            localStorage.removeItem('mybro_messages');
+            setMessages([]);
+          }}
+          style={{
+            padding: '10px 16px',
+            backgroundColor: '#eee',
+            border: '1px solid #ccc',
+          }}
+        >
+          Borrar
+        </button>
+        <a
+          href="https://ko-fi.com/mybroapp"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            padding: '10px 16px',
+            backgroundColor: '#f9c846',
+            color: '#000',
+            textDecoration: 'none',
+            borderRadius: 6,
+            fontWeight: 'bold',
+            border: '1px solid #d4a73c',
+          }}
+        >
+          ☕ Donar
+        </a>
       </div>
     </div>
   );
