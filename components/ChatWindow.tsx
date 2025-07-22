@@ -76,13 +76,15 @@ export default function ChatWindow() {
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
-      {/* Área de mensajes */}
+      {/* Área de mensajes con altura adaptativa */}
       <div
         style={{
           flex: 1,
           overflowY: 'auto',
           padding: '12px',
           backgroundColor: '#fff',
+          maxHeight: 'calc(100dvh - 50px - 110px)', // Altura total menos header e input
+          transition: 'max-height 0.2s ease-out',
         }}
       >
         {messages.map((msg, i) => (
@@ -158,3 +160,4 @@ export default function ChatWindow() {
     </div>
   );
 }
+
