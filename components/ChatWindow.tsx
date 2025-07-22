@@ -6,7 +6,6 @@ export default function ChatWindow() {
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState('');
 
-  // ⏪ Cargar mensajes guardados
   useEffect(() => {
     const storedMessages = localStorage.getItem('mybro_messages');
     if (storedMessages) {
@@ -14,7 +13,6 @@ export default function ChatWindow() {
     }
   }, []);
 
-  // 💾 Guardar mensajes en localStorage
   useEffect(() => {
     localStorage.setItem('mybro_messages', JSON.stringify(messages));
   }, [messages]);
@@ -50,14 +48,12 @@ export default function ChatWindow() {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-gray-50 text-gray-900 font-sans">
-      {/* 🔝 Header fijo */}
-      <header className="bg-white shadow-md text-center text-xl font-semibold py-3 sticky top-0 z-10">
+    <div className="flex flex-col h-screen overflow-hidden font-sans">
+      <header className="bg-white shadow text-center py-3 text-lg font-bold sticky top-0 z-10">
         MyBroApp
       </header>
 
-      {/* 💬 Área de mensajes con scroll */}
-      <div className="flex-1 overflow-y-auto px-4 py-2">
+      <div className="flex-1 overflow-y-auto px-4 py-2 bg-gray-50">
         {messages.map((msg, i) => (
           <div key={i} className="mb-2 whitespace-pre-wrap">
             {msg}
@@ -65,8 +61,7 @@ export default function ChatWindow() {
         ))}
       </div>
 
-      {/* ✍🏻 Input + Botones */}
-      <div className="p-2 border-t bg-white">
+      <div className="p-2 bg-white border-t">
         <div className="flex gap-2 mb-2">
           <input
             type="text"
@@ -74,16 +69,15 @@ export default function ChatWindow() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Escribe aquí..."
-            className="flex-1 px-4 py-2 border rounded text-base"
+            className="flex-1 px-4 py-2 border rounded"
           />
           <button
             onClick={handleSend}
-            className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
           >
-            ➤
+            Enviar
           </button>
         </div>
-
         <div className="flex gap-2">
           <button
             onClick={handleClear}
