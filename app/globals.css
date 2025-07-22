@@ -2,13 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 🧷 Fijar pantalla, eliminar scroll global */
+/* 🧷 Global reset y estilo base */
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
- margin: 0;
+  margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* ❌ Desactiva scroll global */
+  overflow: hidden; /* ❌ Elimina scroll global */
   background-color: #f9f9f9;
-  font-family: sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-text-size-adjust: 100%; /* ✅ Prevenir zoom automático en móviles */
+}
+
+/* ✅ Evitar zoom en inputs en móviles (Safari) */
+input,
+textarea,
+button,
+select {
+  font-size: 16px;
 }
