@@ -61,7 +61,23 @@ export default function ChatWindow() {
         placeholder="Escribe aquí..."
         style={{ width: '80%', padding: 8, marginTop: 10 }}
       />
-      <button onClick={handleSend} style={{ padding: 8, marginLeft: 10 }}>Enviar</button>
+      <div style={{ marginTop: 10 }}>
+        <button onClick={handleSend} style={{ padding: 8, marginRight: 10 }}>Enviar</button>
+        <button
+          onClick={() => {
+            localStorage.removeItem('mybro_messages');
+            setMessages([]);
+          }}
+          style={{
+            padding: 8,
+            backgroundColor: '#eee',
+            border: '1px solid #ccc',
+            color: '#333',
+          }}
+        >
+          Borrar chat
+        </button>
+      </div>
     </div>
   );
 }
