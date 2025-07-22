@@ -46,7 +46,6 @@ export default function ChatWindow() {
 
   return (
     <div style={{ height: '100dvh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-      
       {/* Header fijo tipo app */}
       <div
         style={{
@@ -61,18 +60,26 @@ export default function ChatWindow() {
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 1000,
+          fontFamily: 'Inter, system-ui, sans-serif',
         }}
       >
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
-      {/* Área principal (sin scroll interno) */}
+      {/* Contenido debajo del header */}
       <div style={{ paddingTop: 50, flex: 1, display: 'flex', flexDirection: 'column' }}>
-        
-        {/* Área de mensajes */}
-        <div style={{ flex: 1, padding: '12px', backgroundColor: '#fff' }}>
+        {/* Área de mensajes con scroll */}
+        <div
+          style={{
+            flex: 1,
+            padding: '10px',
+            overflowY: 'auto',
+            backgroundColor: '#fff',
+            fontFamily: 'Inter, system-ui, sans-serif', // ✅ Aquí se aplica la fuente
+          }}
+        >
           {messages.map((msg, i) => (
-            <div key={i} style={{ marginBottom: 12 }}>{msg}</div>
+            <div key={i} style={{ marginBottom: 10 }}>{msg}</div>
           ))}
           <div ref={messagesEndRef} />
         </div>
@@ -80,12 +87,13 @@ export default function ChatWindow() {
         {/* Input + botones */}
         <div
           style={{
-            padding: '12px',
+            padding: '10px',
             borderTop: '1px solid #eee',
             backgroundColor: '#f9f9f9',
             display: 'flex',
             gap: 8,
             flexWrap: 'wrap',
+            fontFamily: 'Inter, system-ui, sans-serif',
           }}
         >
           <input
@@ -107,7 +115,20 @@ export default function ChatWindow() {
               fontSize: 16,
             }}
           />
-          <button onClick={handleSend} style={{ padding: '10px 16px' }}>➡️</button>
+          <button
+            onClick={handleSend}
+            style={{
+              padding: '10px 16px',
+              fontSize: 16,
+              borderRadius: 6,
+              backgroundColor: '#007aff',
+              color: '#fff',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            ➤
+          </button>
           <button
             onClick={() => {
               localStorage.removeItem('mybro_messages');
@@ -117,6 +138,8 @@ export default function ChatWindow() {
               padding: '10px 16px',
               backgroundColor: '#eee',
               border: '1px solid #ccc',
+              borderRadius: 6,
+              fontSize: 16,
             }}
           >
             Borrar
@@ -133,6 +156,8 @@ export default function ChatWindow() {
               borderRadius: 6,
               fontWeight: 'bold',
               border: '1px solid #d4a73c',
+              fontSize: 16,
+              display: 'inline-block',
             }}
           >
             ☕ Donar
