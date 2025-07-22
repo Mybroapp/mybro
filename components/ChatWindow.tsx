@@ -6,6 +6,7 @@ export default function ChatWindow() {
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const storedMessages = localStorage.getItem('mybro_messages');
@@ -49,17 +50,16 @@ export default function ChatWindow() {
   return (
     <div
       style={{
-        height: '100%',
         display: 'flex',
         flexDirection: 'column',
+        height: '100dvh',
         fontFamily: 'Inter, system-ui, sans-serif',
-        overflow: 'hidden',
       }}
     >
-      {/* 🧠 HEADER FIJO */}
+      {/* Header fijo */}
       <div
         style={{
-          position: 'fixed',
+          position: 'sticky',
           top: 0,
           left: 0,
           width: '100%',
@@ -70,17 +70,17 @@ export default function ChatWindow() {
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 1000,
+          flexShrink: 0,
         }}
       >
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
-      {/* ⚡ CONTENIDO DEL CHAT */}
+      {/* Área de mensajes */}
       <div
         style={{
           flex: 1,
-          marginTop: 50,
-          overflowY: messages.length >= 3 ? 'auto' : 'hidden',
+          overflowY: 'auto',
           padding: '12px',
           backgroundColor: '#fff',
         }}
@@ -91,21 +91,24 @@ export default function ChatWindow() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* 🎯 INPUT Y BOTONES */}
+      {/* Input + botones */}
       <div
         style={{
           padding: '10px',
           borderTop: '1px solid #eee',
           backgroundColor: '#f9f9f9',
           display: 'flex',
-          gap: 8,
           flexWrap: 'wrap',
+          gap: 8,
+          flexShrink: 0,
         }}
       >
         <input
+          ref={inputRef}
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onFocus={scrollToBottom}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
@@ -155,4 +158,3 @@ export default function ChatWindow() {
     </div>
   );
 }
-
