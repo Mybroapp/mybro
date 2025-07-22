@@ -45,54 +45,58 @@ export default function ChatWindow() {
   };
 
   return (
-    <div style={{ height: '100dvh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-      {/* Header fijo tipo app */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: 50,
-          backgroundColor: '#ffffff',
-          borderBottom: '1px solid #ddd',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 1000,
-        }}
-      >
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100vh',
+      fontFamily: 'Inter, system-ui, sans-serif'
+    }}>
+      {/* Header fijo */}
+      <div style={{
+        height: 50,
+        backgroundColor: '#ffffff',
+        borderBottom: '1px solid #ddd',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+      }}>
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
       {/* Contenido debajo del header */}
-      <div style={{ paddingTop: 50, flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div style={{
+        marginTop: 50,
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
         {/* Área de mensajes con scroll */}
-        <div
-          style={{
-            flex: 1,
-            padding: '10px',
-            overflowY: 'auto',
-            backgroundColor: '#fff',
-          }}
-        >
+        <div style={{
+          flex: 1,
+          overflowY: 'auto',
+          padding: '12px',
+          backgroundColor: '#fff'
+        }}>
           {messages.map((msg, i) => (
-            <div key={i} style={{ marginBottom: 10 }}>{msg}</div>
+            <div key={i} style={{ marginBottom: 12 }}>{msg}</div>
           ))}
           <div ref={messagesEndRef} />
         </div>
 
         {/* Input + botones */}
-        <div
-          style={{
-            padding: '10px',
-            borderTop: '1px solid #eee',
-            backgroundColor: '#f9f9f9',
-            display: 'flex',
-            gap: 8,
-            flexWrap: 'wrap',
-          }}
-        >
+        <div style={{
+          padding: '12px',
+          borderTop: '1px solid #eee',
+          backgroundColor: '#f9f9f9',
+          display: 'flex',
+          gap: 8,
+          flexWrap: 'wrap',
+        }}>
           <input
             type="text"
             value={input}
@@ -112,7 +116,7 @@ export default function ChatWindow() {
               fontSize: 16,
             }}
           />
-          <button onClick={handleSend} style={{ padding: '10px 16px' }}>Enviar</button>
+          <button onClick={handleSend} style={{ padding: '10px 16px' }}>➡️</button>
           <button
             onClick={() => {
               localStorage.removeItem('mybro_messages');
