@@ -27,7 +27,7 @@ export default function ChatWindow() {
     if (!input.trim()) return;
 
     const userMessage = input;
-    setMessages((prev) => [...prev, `🧍: ${userMessage}`]);
+    setMessages((prev) => [...prev, `🧽: ${userMessage}`]);
     setInput('');
 
     try {
@@ -112,7 +112,14 @@ export default function ChatWindow() {
               fontSize: 16,
             }}
           />
-          <button onClick={handleSend} style={{ padding: '10px 16px' }}>Enviar</button>
+          {/* Botón Enviar con ícono de flecha */}
+          <button
+            onClick={handleSend}
+            style={{ padding: '10px 16px', fontSize: 18 }}
+            aria-label="Enviar"
+          >
+            ➤
+          </button>
           <button
             onClick={() => {
               localStorage.removeItem('mybro_messages');
