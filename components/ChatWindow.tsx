@@ -17,9 +17,7 @@ export default function ChatWindow() {
 
   useEffect(() => {
     localStorage.setItem('mybro_messages', JSON.stringify(messages));
-    if (messages.length > 2) {
-      scrollToBottom();
-    }
+    scrollToBottom();
   }, [messages]);
 
   const scrollToBottom = () => {
@@ -160,3 +158,4 @@ export default function ChatWindow() {
     </div>
   );
 }
+
