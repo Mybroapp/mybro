@@ -27,7 +27,7 @@ export default function ChatWindow() {
     if (!input.trim()) return;
 
     const userMessage = input;
-    setMessages((prev) => [...prev, 🧍: ${userMessage}]);
+    setMessages((prev) => [...prev, `🧍: ${userMessage}`]);
     setInput('');
 
     try {
@@ -38,7 +38,7 @@ export default function ChatWindow() {
       });
 
       const data = await res.json();
-      setMessages((prev) => [...prev, 🤖: ${data.reply}]);
+      setMessages((prev) => [...prev, `🤖: ${data.reply}`]);
     } catch (error) {
       setMessages((prev) => [...prev, '❌ Error en la respuesta']);
     }
