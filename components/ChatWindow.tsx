@@ -23,7 +23,7 @@ export default function ChatWindow() {
   const scrollToBottom = () => {
     setTimeout(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100); // Pequeño delay para asegurar que el render haya terminado
+    }, 100);
   };
 
   const handleSend = async () => {
@@ -57,7 +57,6 @@ export default function ChatWindow() {
         overflow: 'hidden',
       }}
     >
-      {/* Header fijo tipo app */}
       <div
         style={{
           position: 'fixed',
@@ -76,15 +75,14 @@ export default function ChatWindow() {
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
-      {/* Contenedor del chat completo debajo del header */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', paddingTop: 50 }}>
-        {/* Área de mensajes */}
         <div
           style={{
             flex: 1,
             overflowY: 'auto',
             padding: '12px',
             backgroundColor: '#fff',
+            paddingBottom: 100, // espacio para input visible
           }}
         >
           {messages.map((msg, i) => (
@@ -93,9 +91,12 @@ export default function ChatWindow() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Área de input y botones */}
         <div
           style={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            width: '100%',
             padding: '10px',
             borderTop: '1px solid #eee',
             backgroundColor: '#f9f9f9',
