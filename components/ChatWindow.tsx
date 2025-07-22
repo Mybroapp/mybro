@@ -6,7 +6,6 @@ export default function ChatWindow() {
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const storedMessages = localStorage.getItem('mybro_messages');
@@ -104,11 +103,9 @@ export default function ChatWindow() {
         }}
       >
         <input
-          ref={inputRef}
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onFocus={scrollToBottom}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
@@ -158,3 +155,4 @@ export default function ChatWindow() {
     </div>
   );
 }
+
