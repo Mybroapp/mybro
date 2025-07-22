@@ -6,7 +6,6 @@ export default function ChatWindow() {
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const storedMessages = localStorage.getItem('mybro_messages');
@@ -21,9 +20,7 @@ export default function ChatWindow() {
   }, [messages]);
 
   const scrollToBottom = () => {
-    setTimeout(() => {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleSend = async () => {
@@ -48,69 +45,62 @@ export default function ChatWindow() {
   };
 
   return (
-    <div
-      style={{
-        height: '100dvh',
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100vh',
+      fontFamily: 'Inter, system-ui, sans-serif'
+    }}>
+      {/* Header fijo */}
+      <div style={{
+        height: 50,
+        backgroundColor: '#ffffff',
+        borderBottom: '1px solid #ddd',
         display: 'flex',
-        flexDirection: 'column',
-        fontFamily: 'Inter, system-ui, sans-serif',
-        overflow: 'hidden',
-      }}
-    >
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: 50,
-          backgroundColor: '#ffffff',
-          borderBottom: '1px solid #ddd',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 1000,
-        }}
-      >
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+      }}>
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', paddingTop: 50 }}>
-        <div
-          style={{
-            flex: 1,
-            overflowY: 'auto',
-            padding: '12px',
-            backgroundColor: '#fff',
-            paddingBottom: 100, // espacio para input visible
-          }}
-        >
+      {/* Contenido debajo del header */}
+      <div style={{
+        marginTop: 50,
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
+        {/* Área de mensajes con scroll */}
+        <div style={{
+          flex: 1,
+          overflowY: 'auto',
+          padding: '12px',
+          backgroundColor: '#fff'
+        }}>
           {messages.map((msg, i) => (
-            <div key={i} style={{ marginBottom: 10 }}>{msg}</div>
+            <div key={i} style={{ marginBottom: 12 }}>{msg}</div>
           ))}
           <div ref={messagesEndRef} />
         </div>
 
-        <div
-          style={{
-            position: 'fixed',
-            bottom: 0,
-            left: 0,
-            width: '100%',
-            padding: '10px',
-            borderTop: '1px solid #eee',
-            backgroundColor: '#f9f9f9',
-            display: 'flex',
-            gap: 8,
-            flexWrap: 'wrap',
-          }}
-        >
+        {/* Input + botones */}
+        <div style={{
+          padding: '12px',
+          borderTop: '1px solid #eee',
+          backgroundColor: '#f9f9f9',
+          display: 'flex',
+          gap: 8,
+          flexWrap: 'wrap',
+        }}>
           <input
-            ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onFocus={() => scrollToBottom()}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault();
@@ -126,7 +116,7 @@ export default function ChatWindow() {
               fontSize: 16,
             }}
           />
-          <button onClick={handleSend} style={{ padding: '10px 16px' }}>Enviar</button>
+          <button onClick={handleSend} style={{ padding: '10px 16px' }}>➡️</button>
           <button
             onClick={() => {
               localStorage.removeItem('mybro_messages');
