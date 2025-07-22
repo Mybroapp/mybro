@@ -1,10 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function ChatWindow() {
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState('');
+
+  // 🔁 Al iniciar, cargar mensajes desde localStorage
+  useEffect(() => {
+    const storedMessages = localStorage.getItem('mybro_messages');
+    if (storedMessages) {
+      setMessages(JSON.parse(storedMessages));
+    }
+  }, []);
+
+  // 💾 Cada vez que cambian los mensajes, guardarlos en localStorage
+  useEffect(() => {
+    localStorage.setItem('mybro_messages', JSON.stringify(messages));
+  }, [messages]);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -46,4 +59,3 @@ export default function ChatWindow() {
     </div>
   );
 }
-
