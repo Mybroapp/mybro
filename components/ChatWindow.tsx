@@ -45,8 +45,8 @@ export default function ChatWindow() {
   };
 
   return (
-    <div style={{ height: '100dvh', overflow: 'hidden' }}>
-      {/* Header fijo */}
+    <div style={{ height: '100dvh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      {/* Header fijo tipo app */}
       <div
         style={{
           position: 'fixed',
@@ -54,37 +54,45 @@ export default function ChatWindow() {
           left: 0,
           width: '100%',
           height: 50,
-          backgroundColor: '#f9f9f9',
-          borderBottom: '1px solid #ccc',
+          backgroundColor: '#ffffff',
+          borderBottom: '1px solid #ddd',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 1000,
         }}
       >
-        <h2 style={{ margin: 0 }}>MyBroApp</h2>
+        <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
       {/* Contenido debajo del header */}
-      <div style={{ paddingTop: 60, height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ paddingTop: 50, flex: 1, display: 'flex', flexDirection: 'column' }}>
+        {/* Área de mensajes con scroll */}
         <div
           style={{
             flex: 1,
-            border: '1px solid #ccc',
-            margin: '0 10px',
-            padding: 10,
+            padding: '10px',
             overflowY: 'auto',
             backgroundColor: '#fff',
           }}
         >
           {messages.map((msg, i) => (
-            <div key={i} style={{ marginBottom: 8 }}>{msg}</div>
+            <div key={i} style={{ marginBottom: 10 }}>{msg}</div>
           ))}
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input y botones */}
-        <div style={{ display: 'flex', margin: 10, gap: 8, flexWrap: 'wrap' }}>
+        {/* Input + botones */}
+        <div
+          style={{
+            padding: '10px',
+            borderTop: '1px solid #eee',
+            backgroundColor: '#f9f9f9',
+            display: 'flex',
+            gap: 8,
+            flexWrap: 'wrap',
+          }}
+        >
           <input
             type="text"
             value={input}
@@ -99,7 +107,7 @@ export default function ChatWindow() {
             style={{
               flex: 1,
               padding: 10,
-              borderRadius: 4,
+              borderRadius: 6,
               border: '1px solid #ccc',
               fontSize: 16,
             }}
@@ -127,13 +135,12 @@ export default function ChatWindow() {
               backgroundColor: '#f9c846',
               color: '#000',
               textDecoration: 'none',
-              borderRadius: 4,
+              borderRadius: 6,
               fontWeight: 'bold',
               border: '1px solid #d4a73c',
-              textAlign: 'center',
             }}
           >
-             Donar
+            ☕ Donar
           </a>
         </div>
       </div>
