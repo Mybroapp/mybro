@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 🧷 Importar fuente Inter desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
 /* 🧷 Global reset y estilo base */
 * {
   box-sizing: border-box;
