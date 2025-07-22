@@ -57,7 +57,7 @@ export default function ChatWindow() {
         overflow: 'hidden',
       }}
     >
-      {/* 🧠 HEADER FIJO */}
+      {/* HEADER */}
       <div
         style={{
           position: 'fixed',
@@ -76,7 +76,7 @@ export default function ChatWindow() {
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
-      {/* ⚡ CONTENIDO DEL CHAT */}
+      {/* MENSAJES */}
       <div
         style={{
           flex: 1,
@@ -92,7 +92,7 @@ export default function ChatWindow() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* 🎯 INPUT Y BOTONES */}
+      {/* INPUT Y BOTONES */}
       <div
         style={{
           padding: '10px',
@@ -108,7 +108,9 @@ export default function ChatWindow() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onFocus={scrollToBottom}
+          onFocus={() => {
+            scrollToBottom();
+          }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
@@ -158,4 +160,3 @@ export default function ChatWindow() {
     </div>
   );
 }
-
