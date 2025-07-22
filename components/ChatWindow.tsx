@@ -18,10 +18,9 @@ export default function ChatWindow() {
   // 💾 Guardar mensajes cuando cambian
   useEffect(() => {
     localStorage.setItem('mybro_messages', JSON.stringify(messages));
-    scrollToBottom(); // 👇 al nuevo mensaje
+    scrollToBottom();
   }, [messages]);
 
-  // 🔽 Scroll automático al final
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -83,6 +82,7 @@ export default function ChatWindow() {
             padding: 10,
             borderRadius: 4,
             border: '1px solid #ccc',
+            fontSize: 16, // ✅ evita el zoom en móviles
           }}
         />
         <button onClick={handleSend} style={{ padding: '10px 16px' }}>Enviar</button>
