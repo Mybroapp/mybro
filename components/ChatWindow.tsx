@@ -76,15 +76,13 @@ export default function ChatWindow() {
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
-      {/* Área de mensajes con altura adaptativa */}
+      {/* Área de mensajes */}
       <div
         style={{
           flex: 1,
           overflowY: 'auto',
           padding: '12px',
           backgroundColor: '#fff',
-          maxHeight: 'calc(100dvh - 50px - 110px)', // Altura total menos header e input
-          transition: 'max-height 0.2s ease-out',
         }}
       >
         {messages.map((msg, i) => (
@@ -112,7 +110,7 @@ export default function ChatWindow() {
           onChange={(e) => setInput(e.target.value)}
           onFocus={scrollToBottom}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') {
+            if (["Enter", "Return", "Go", "Send"].includes(e.key)) {
               e.preventDefault();
               handleSend();
             }
@@ -160,4 +158,3 @@ export default function ChatWindow() {
     </div>
   );
 }
-
