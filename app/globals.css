@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 🧷 Importar fuente Inter desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
-
-/* 🧷 Global reset y estilo base */
+/* 🧷 Reset y estilo global */
 * {
   box-sizing: border-box;
 }
@@ -15,16 +12,17 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* ❌ Elimina scroll global */
+  overflow: hidden; /* ❌ Desactiva scroll global */
   background-color: #f9f9f9;
-  font-family: 'Inter', system-ui, sans-serif;
-  -webkit-text-size-adjust: 100%; /* ✅ Prevenir zoom automático en móviles */
+  font-family: 'Inter', system-ui, sans-serif; /* ✅ Fuente global */
+  -webkit-text-size-adjust: 100%;
 }
 
-/* ✅ Evitar zoom en inputs en móviles (Safari) */
+/* ✅ Prevenir zoom en inputs en móviles (Safari iOS) */
 input,
 textarea,
 button,
 select {
   font-size: 16px;
+  font-family: inherit; /* ✅ Hereda fuente global */
 }
