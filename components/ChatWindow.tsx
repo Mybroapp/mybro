@@ -17,7 +17,9 @@ export default function ChatWindow() {
 
   useEffect(() => {
     localStorage.setItem('mybro_messages', JSON.stringify(messages));
-    scrollToBottom();
+    if (messages.length > 2) {
+      scrollToBottom();
+    }
   }, [messages]);
 
   const scrollToBottom = () => {
@@ -50,16 +52,17 @@ export default function ChatWindow() {
   return (
     <div
       style={{
+        height: '100dvh',
         display: 'flex',
         flexDirection: 'column',
-        height: '100dvh',
         fontFamily: 'Inter, system-ui, sans-serif',
+        overflow: 'hidden',
       }}
     >
-      {/* Header fijo */}
+      {/* 🧠 HEADER FIJO */}
       <div
         style={{
-          position: 'sticky',
+          position: 'fixed',
           top: 0,
           left: 0,
           width: '100%',
@@ -70,16 +73,16 @@ export default function ChatWindow() {
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 1000,
-          flexShrink: 0,
         }}
       >
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
-      {/* Área de mensajes */}
+      {/* ⚡ CONTENIDO DEL CHAT */}
       <div
         style={{
           flex: 1,
+          marginTop: 50,
           overflowY: 'auto',
           padding: '12px',
           backgroundColor: '#fff',
@@ -91,16 +94,15 @@ export default function ChatWindow() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input + botones */}
+      {/* 🎯 INPUT Y BOTONES */}
       <div
         style={{
           padding: '10px',
           borderTop: '1px solid #eee',
           backgroundColor: '#f9f9f9',
           display: 'flex',
-          flexWrap: 'wrap',
           gap: 8,
-          flexShrink: 0,
+          flexWrap: 'wrap',
         }}
       >
         <input
