@@ -45,9 +45,9 @@ export default function ChatWindow() {
   };
 
   return (
-    <div style={{ height: '100dvh', display: 'flex', flexDirection: 'column', overflow: 'hidden', fontFamily: 'Inter, system-ui, sans-serif' }}>
+    <div style={{ height: '100dvh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       
-      {/* Header fijo */}
+      {/* Header fijo tipo app */}
       <div
         style={{
           position: 'fixed',
@@ -66,25 +66,18 @@ export default function ChatWindow() {
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
-      {/* Contenedor principal bajo el header */}
+      {/* Área principal (sin scroll interno) */}
       <div style={{ paddingTop: 50, flex: 1, display: 'flex', flexDirection: 'column' }}>
         
-        {/* Chat con scroll interno */}
-        <div
-          style={{
-            flex: 1,
-            overflowY: 'auto',
-            padding: '12px',
-            backgroundColor: '#fff',
-          }}
-        >
+        {/* Área de mensajes */}
+        <div style={{ flex: 1, padding: '12px', backgroundColor: '#fff' }}>
           {messages.map((msg, i) => (
             <div key={i} style={{ marginBottom: 12 }}>{msg}</div>
           ))}
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input y botones */}
+        {/* Input + botones */}
         <div
           style={{
             padding: '12px',
@@ -112,7 +105,6 @@ export default function ChatWindow() {
               borderRadius: 6,
               border: '1px solid #ccc',
               fontSize: 16,
-              fontFamily: 'inherit',
             }}
           />
           <button onClick={handleSend} style={{ padding: '10px 16px' }}>➡️</button>
