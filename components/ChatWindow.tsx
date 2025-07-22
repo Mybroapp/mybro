@@ -81,7 +81,7 @@ export default function ChatWindow() {
         style={{
           flex: 1,
           marginTop: 50,
-          overflowY: 'auto',
+          overflowY: messages.length >= 3 ? 'auto' : 'hidden',
           padding: '12px',
           backgroundColor: '#fff',
         }}
