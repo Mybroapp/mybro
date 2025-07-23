@@ -121,8 +121,6 @@ export default function ChatWindow() {
       {/* Input + botones */}
       <div
         style={{
-          position: 'sticky',
-          bottom: 0,
           padding: '10px',
           borderTop: '1px solid #eee',
           backgroundColor: '#f9f9f9',
@@ -188,4 +186,3 @@ export default function ChatWindow() {
     </div>
   );
 }
-
