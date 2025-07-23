@@ -32,6 +32,7 @@ export default function ChatWindow() {
     const userMessage = input;
     setMessages((prev) => [...prev, `<strong>Yo</strong>: ${userMessage}`]);
     setInput('');
+    inputRef.current?.blur(); // Quitar foco para cerrar teclado
 
     try {
       const res = await fetch('/api/chat', {
