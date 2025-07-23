@@ -90,7 +90,7 @@ export default function ChatWindow() {
       {/* Header fijo */}
       <div
         style={{
-          position: 'sticky',
+          position: 'fixed',
           top: 0,
           left: 0,
           width: '100%',
@@ -113,7 +113,7 @@ export default function ChatWindow() {
           flex: 1,
           overflowY: 'auto',
           minHeight: 0,
-          padding: '12px',
+          padding: '62px 12px 12px',
           backgroundColor: '#fff',
         }}
       >
