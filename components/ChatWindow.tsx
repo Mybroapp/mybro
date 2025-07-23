@@ -52,8 +52,10 @@ export default function ChatWindow() {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100dvh',
+        height: '100vh',
+        minHeight: 0,
         fontFamily: 'Inter, system-ui, sans-serif',
+        overflow: 'hidden',
       }}
     >
       {/* Header fijo */}
@@ -81,6 +83,7 @@ export default function ChatWindow() {
         style={{
           flex: 1,
           overflowY: 'auto',
+          minHeight: 0,
           padding: '12px',
           backgroundColor: '#fff',
         }}
@@ -109,6 +112,7 @@ export default function ChatWindow() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onFocus={scrollToBottom}
+          onClick={scrollToBottom}
           onKeyDown={(e) => {
             if (["Enter", "Return", "Go", "Send"].includes(e.key)) {
               e.preventDefault();
