@@ -32,7 +32,7 @@ export default function ChatWindow() {
     const userMessage = input;
     setMessages((prev) => [...prev, `<strong>Yo</strong>: ${userMessage}`]);
     setInput('');
-    inputRef.current?.blur(); // Quitar foco para cerrar teclado
+    inputRef.current?.blur();
 
     try {
       const res = await fetch('/api/chat', {
@@ -86,7 +86,6 @@ export default function ChatWindow() {
         fontFamily: 'Inter, system-ui, sans-serif',
       }}
     >
-      {/* Header fijo */}
       <div
         style={{
           position: 'sticky',
@@ -106,21 +105,20 @@ export default function ChatWindow() {
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
-      {/* Área de mensajes */}
       <div
         style={{
           flex: 1,
           overflowY: 'auto',
           padding: '12px',
           backgroundColor: '#fff',
-          marginBottom: 120, // deja espacio para input en móviles
+          minHeight: '400px',
+          marginBottom: 120,
         }}
       >
         {messages.map((msg, i) => renderMessage(msg, i))}
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input + botones */}
       <div
         style={{
           position: 'fixed',
