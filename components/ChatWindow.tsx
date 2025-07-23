@@ -111,8 +111,7 @@ export default function ChatWindow() {
           overflowY: 'auto',
           padding: '12px',
           backgroundColor: '#fff',
-          minHeight: '200px',
-          marginBottom: 80,
+          minHeight: 'calc(100dvh - 50px - 80px)',
         }}
       >
         {messages.map((msg, i) => renderMessage(msg, i))}
