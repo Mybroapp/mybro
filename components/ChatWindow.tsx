@@ -88,10 +88,10 @@ export default function ChatWindow() {
       {/* Header fijo */}
       <div
         style={{
-          position: 'fixed',
+          position: 'sticky',
           top: 0,
           left: 0,
-          right: 0,
+          width: '100%',
           height: 50,
           backgroundColor: '#ffffff',
           borderBottom: '1px solid #ddd',
@@ -99,20 +99,20 @@ export default function ChatWindow() {
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 1000,
+          flexShrink: 0,
         }}
       >
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
-      {/* Mensajes */}
+      {/* Área de mensajes */}
       <div
         style={{
           flex: 1,
-          marginTop: 50,
-          marginBottom: 120,
           overflowY: 'auto',
           padding: '12px',
           backgroundColor: '#fff',
+          marginBottom: 120, // deja espacio para input en móviles
         }}
       >
         {messages.map((msg, i) => renderMessage(msg, i))}
