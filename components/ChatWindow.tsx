@@ -82,7 +82,7 @@ export default function ChatWindow() {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh',
+        height: '100dvh',
         fontFamily: 'Inter, system-ui, sans-serif',
       }}
     >
@@ -111,8 +111,8 @@ export default function ChatWindow() {
           overflowY: 'auto',
           padding: '12px',
           backgroundColor: '#fff',
-          minHeight: '400px',
-          marginBottom: 120,
+          minHeight: '200px',
+          marginBottom: 80,
         }}
       >
         {messages.map((msg, i) => renderMessage(msg, i))}
