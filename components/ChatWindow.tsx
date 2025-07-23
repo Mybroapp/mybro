@@ -30,7 +30,7 @@ export default function ChatWindow() {
     if (!input.trim()) return;
 
     const userMessage = input;
-    setMessages((prev) => [...prev, `**Yo**: ${userMessage}`]);
+    setMessages((prev) => [...prev, `<strong>Yo</strong>: ${userMessage}`]);
     setInput('');
 
     try {
@@ -41,7 +41,7 @@ export default function ChatWindow() {
       });
 
       const data = await res.json();
-      setMessages((prev) => [...prev, `**Bro**: ${data.reply}`]);
+      setMessages((prev) => [...prev, `<strong>Bro</strong>: ${data.reply}`]);
     } catch (error) {
       setMessages((prev) => [...prev, '❌ Error en la respuesta']);
     }
@@ -89,7 +89,7 @@ export default function ChatWindow() {
         }}
       >
         {messages.map((msg, i) => (
-          <div key={i} style={{ marginBottom: 10 }}>{msg}</div>
+          <div key={i} style={{ marginBottom: 10 }} dangerouslySetInnerHTML={{ __html: msg }} />
         ))}
         <div ref={messagesEndRef} />
       </div>
@@ -162,4 +162,3 @@ export default function ChatWindow() {
     </div>
   );
 }
-
