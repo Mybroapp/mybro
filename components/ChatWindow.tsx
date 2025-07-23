@@ -81,16 +81,14 @@ export default function ChatWindow() {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100vh',
-        minHeight: 0,
+        height: '100dvh',
         fontFamily: 'Inter, system-ui, sans-serif',
-        overflow: 'hidden',
       }}
     >
       {/* Header fijo */}
       <div
         style={{
-          position: 'fixed',
+          position: 'sticky',
           top: 0,
           left: 0,
           width: '100%',
@@ -112,8 +110,7 @@ export default function ChatWindow() {
         style={{
           flex: 1,
           overflowY: 'auto',
-          minHeight: 0,
-          padding: '62px 12px 12px',
+          padding: '12px',
           backgroundColor: '#fff',
         }}
       >
@@ -124,6 +121,8 @@ export default function ChatWindow() {
       {/* Input + botones */}
       <div
         style={{
+          position: 'sticky',
+          bottom: 0,
           padding: '10px',
           borderTop: '1px solid #eee',
           backgroundColor: '#f9f9f9',
@@ -189,3 +188,4 @@ export default function ChatWindow() {
     </div>
   );
 }
+
