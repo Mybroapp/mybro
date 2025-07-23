@@ -47,6 +47,35 @@ export default function ChatWindow() {
     }
   };
 
+  const renderMessage = (msg: string, i: number) => {
+    const isUser = msg.startsWith('<strong>Yo</strong>:');
+    const isBro = msg.startsWith('<strong>Bro</strong>:');
+    const alignment = isUser ? 'flex-end' : 'flex-start';
+    const bgColor = isUser ? '#e0f2ff' : isBro ? '#f1f1f1' : '#fff';
+
+    return (
+      <div
+        key={i}
+        style={{
+          display: 'flex',
+          justifyContent: alignment,
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: bgColor,
+            padding: '8px 12px',
+            borderRadius: 8,
+            marginBottom: 10,
+            maxWidth: '80%',
+            whiteSpace: 'pre-wrap',
+          }}
+          dangerouslySetInnerHTML={{ __html: msg }}
+        />
+      </div>
+    );
+  };
+
   return (
     <div
       style={{
@@ -88,9 +117,7 @@ export default function ChatWindow() {
           backgroundColor: '#fff',
         }}
       >
-        {messages.map((msg, i) => (
-          <div key={i} style={{ marginBottom: 10 }} dangerouslySetInnerHTML={{ __html: msg }} />
-        ))}
+        {messages.map((msg, i) => renderMessage(msg, i))}
         <div ref={messagesEndRef} />
       </div>
 
