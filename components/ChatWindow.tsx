@@ -81,17 +81,17 @@ export default function ChatWindow() {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100dvh',
+        minHeight: '100vh',
         fontFamily: 'Inter, system-ui, sans-serif',
       }}
     >
       {/* Header fijo */}
       <div
         style={{
-          position: 'sticky',
+          position: 'fixed',
           top: 0,
           left: 0,
-          width: '100%',
+          right: 0,
           height: 50,
           backgroundColor: '#ffffff',
           borderBottom: '1px solid #ddd',
@@ -99,16 +99,17 @@ export default function ChatWindow() {
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 1000,
-          flexShrink: 0,
         }}
       >
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>MyBroApp</h2>
       </div>
 
-      {/* Área de mensajes */}
+      {/* Mensajes */}
       <div
         style={{
           flex: 1,
+          marginTop: 50,
+          marginBottom: 120,
           overflowY: 'auto',
           padding: '12px',
           backgroundColor: '#fff',
@@ -121,13 +122,17 @@ export default function ChatWindow() {
       {/* Input + botones */}
       <div
         style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
           padding: '10px',
           borderTop: '1px solid #eee',
           backgroundColor: '#f9f9f9',
           display: 'flex',
           flexWrap: 'wrap',
           gap: 8,
-          flexShrink: 0,
+          zIndex: 1000,
         }}
       >
         <input
