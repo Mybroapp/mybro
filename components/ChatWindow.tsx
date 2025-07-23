@@ -114,6 +114,7 @@ export default function ChatWindow() {
           minHeight: 'calc(100dvh - 50px - 80px)',
         }}
       >
+        {messages.length <= 2 && <div style={{ height: 100 }} />}
         {messages.map((msg, i) => renderMessage(msg, i))}
         <div ref={messagesEndRef} />
       </div>
