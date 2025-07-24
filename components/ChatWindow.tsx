@@ -20,17 +20,6 @@ export default function ChatWindow() {
     scrollToBottom();
   }, [messages]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      scrollToBottom();
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   const scrollToBottom = () => {
     setTimeout(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -122,10 +111,10 @@ export default function ChatWindow() {
           overflowY: 'auto',
           padding: '12px',
           backgroundColor: '#fff',
-          minHeight: 'calc(100dvh - 50px - 80px)',
+          minHeight: '200px',
+          marginBottom: 80,
         }}
       >
-        {messages.length <= 2 && <div style={{ height: 100 }} />}
         {messages.map((msg, i) => renderMessage(msg, i))}
         <div ref={messagesEndRef} />
       </div>
