@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'MyBroApp',
-  description: 'Tu compañero emocional impulsado por IA',
+  description: 'Tu compañero emocional',
 };
 
 export default function RootLayout({
