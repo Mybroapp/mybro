@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 export default function ChatWindow() {
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -34,6 +35,8 @@ export default function ChatWindow() {
     setInput('');
     inputRef.current?.blur();
 
+    setIsTyping(true);
+
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
@@ -45,6 +48,8 @@ export default function ChatWindow() {
       setMessages((prev) => [...prev, `<strong>Bro</strong>: ${data.reply}`]);
     } catch (error) {
       setMessages((prev) => [...prev, '❌ Error en la respuesta']);
+    } finally {
+      setIsTyping(false);
     }
   };
 
@@ -116,6 +121,27 @@ export default function ChatWindow() {
         }}
       >
         {messages.map((msg, i) => renderMessage(msg, i))}
+        {isTyping && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: '#f1f1f1',
+                padding: '8px 12px',
+                borderRadius: 8,
+                marginBottom: 10,
+                maxWidth: '80%',
+                fontStyle: 'italic',
+              }}
+            >
+              Escribiendo...
+            </div>
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
 
