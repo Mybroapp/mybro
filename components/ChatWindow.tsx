@@ -210,7 +210,7 @@ export default function ChatWindow() {
             border: '1px solid #d4a73c',
           }}
         >
-          ☕ Donar
+           Donar
         </a>
       </div>
     </div>
